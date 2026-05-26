@@ -33,4 +33,11 @@ describe('Funcionalidade: Cadastro', () => {
         cy.get('#user-name').should('contain', nome)
     })
 
+    it.only('Deve preencher cadastro com sucesso - Usando comando customizado', () => {
+        let email = `teste${Date.now()}@teste.com`
+        let nome = faker.person.fullName({ gender: 'female' })
+        cy.preencherCadastro(nome, email, '11999999999', 'Senha123', 'Senha123')
+        cy.url().should('include', 'dashboard.html')
+    })
+
 });
