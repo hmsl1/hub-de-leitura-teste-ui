@@ -8,6 +8,10 @@ describe('Funcionalidade: Cadastro', () => {
         cadastroPage.visitarPaginaCadastro()
     })
 
+afterEach(() => {
+    cy.screenshot()
+})
+
     it('Deve fazer cadastro com sucesso, usando função JS', () => {
         let email = `teste${Date.now()}@teste.com`
         cy.get('#name').type('Fabio Araujo')
@@ -47,7 +51,7 @@ describe('Funcionalidade: Cadastro', () => {
         cy.url().should('include', 'dashboard.html')
     })
 
-    it.only('Deve validar mensagem cadastrar sem preencher nome', () => {
+    it('Deve validar mensagem cadastrar sem preencher nome', () => {
         cadastroPage.preencherCadastro('', 'fabio@teste.com', '11999999999', 'Senha123', 'Senha123')
         cy.get(':nth-child(1) > .invalid-feedback').should('contain', 'Nome deve ter pelo menos 2 caracteres')
     })
